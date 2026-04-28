@@ -1,0 +1,7 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" rx="8" fill="#4BAF47"/>
+  <path d="M15 12L15 28L20 28L20 20L25 20L30 28L35 28L30 20L35 20L35 12L30 12L30 20L25 20L25 12L20 12L20 20L15 20Z" fill="white"/>
+  <circle cx="45" cy="20" r="3" fill="#EEC044"/>
+  <path d="M55 15L65 25L75 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <text x="85" y="25" fill="white" font-family="Arial" font-size="12" font-weight="bold">AGRIOS</text>
+</svg>

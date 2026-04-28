@@ -1,0 +1,11 @@
+# Modern browsers only - avoid legacy polyfills
+> 0.5%
+last 2 versions
+not dead
+not IE 11
+not Edge < 79
+not Chrome < 80
+not Firefox < 75
+not Safari < 13
+not iOS < 13
+not Android < 80

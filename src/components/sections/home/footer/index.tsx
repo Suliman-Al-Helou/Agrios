@@ -1,0 +1,6 @@
+export { Footer } from "./Footer"
+export { FooterBrand } from "./FooterBrand"
+export { FooterLinks } from "./FooterLinks"
+export { FooterNews } from "./FooterNews"
+export { FooterContact } from "./FooterContact"
+export type { FooterLink, NewsItem, ContactInfo } from "./footer.types"
