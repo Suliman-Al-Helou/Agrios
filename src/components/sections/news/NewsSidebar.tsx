@@ -10,7 +10,7 @@ import type {
   LATEST_POSTS,
   CATEGORIES,
   TAGS,
-} from "@/constants/news/news-page";
+} from "@/constants/shared/newsCard";
 
 type Props = {
   latestPosts: typeof LATEST_POSTS;
