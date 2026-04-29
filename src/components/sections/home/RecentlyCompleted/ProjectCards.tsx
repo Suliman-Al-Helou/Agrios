@@ -1,16 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { cardAnimation } from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import type { Project } from "@/constants/home/Projects";
 
-type Props = Omit<Project, "id">;
+type Props = Omit<Project, "id"> & { delay?: number };
 
-export default function ProjectCard({ title, image, imageAlt, href }: Props) {
+export default function ProjectCard({ title, image, imageAlt, href, delay = 0 }: Props) {
   return (
-    <motion.div variants={cardAnimation}>
+    <AnimatedSection animation="fadeInUp" delay={delay}>
       <Link
         href={href}
         className="group relative block cursor-pointer overflow-hidden rounded-2xl"
@@ -34,6 +31,6 @@ export default function ProjectCard({ title, image, imageAlt, href }: Props) {
           {title}
         </h3>
       </Link>
-    </motion.div>
+    </AnimatedSection>
   );
 }

@@ -1,13 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { User, MessageCircle } from "lucide-react";
-import { motion } from "motion/react";
-import { cardAnimation } from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import type { NewsArticle } from "@/constants/shared/newsCard";
 
-type Props = Omit<NewsArticle, "id" | "excerpt" | "category">;
+type Props = Omit<NewsArticle, "id" | "excerpt" | "category"> & { delay?: number };
 
 export default function NewsCard({
   title,
@@ -18,9 +15,10 @@ export default function NewsCard({
   author,
   comments,
   href,
+  delay = 0,
 }: Props) {
   return (
-    <motion.div variants={cardAnimation}>
+    <AnimatedSection animation="fadeInUp" delay={delay}>
       <Link
         href={href}
         className="group block h-[420px] overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
@@ -64,6 +62,6 @@ export default function NewsCard({
           </h3>
         </div>
       </Link>
-    </motion.div>
+    </AnimatedSection>
   );
 }

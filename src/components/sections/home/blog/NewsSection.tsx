@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "motion/react";
-import { staggerCards } from "@/lib/animations";
 import { NEWS_CONTENT, NEWS_ARTICLES } from "@/constants/home/News";
 import NewsCard from "@/components/shared/NewsCard";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -14,14 +10,8 @@ export default function NewsSection() {
         <SectionHeader badge={NEWS_CONTENT.badge} title={NEWS_CONTENT.title} />
 
         {/* Cards */}
-        <motion.div
-          variants={staggerCards}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid gap-8 md:grid-cols-3"
-        >
-          {NEWS_ARTICLES.map((article) => (
+        <div className="grid gap-8 md:grid-cols-3">
+          {NEWS_ARTICLES.map((article, index) => (
             <NewsCard
               key={article.id}
               title={article.title}
@@ -33,9 +23,10 @@ export default function NewsSection() {
               comments={article.comments}
               href={article.href}
               titleGrid={""}
+              delay={index * 200}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
