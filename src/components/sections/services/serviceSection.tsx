@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-
-export default function ServicesSection({ data }) {
+interface Service {
+  id: string;
+  title: string;
+  image: string;
+}
+export default function ServicesSection({ data }: { data: Service[] }) {
   return (
     <section className="py-16 bg-white">
       <div className="mx-auto max-w-6xl px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
