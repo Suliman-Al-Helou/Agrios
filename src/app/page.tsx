@@ -5,6 +5,7 @@ import Features from "../components/sections/home/features/Features";
 import AboutSection from "../components/sections/home/about/AboutSection";
 import ServicesSection from "../components/service/ServicesSection";
 import VideoSection from "@/components/ui/VideoSection";
+import { VIDEO_CONTENT } from "@/constants/home/videoSection";
 import { HOME_SERVICES } from "@/constants/home/Services";
 const ProjectsSection = dynamic(
   () => import("@/components/sections/home/RecentlyCompleted/ProjectsSection"),
@@ -32,7 +33,7 @@ export default function Home() {
 
       <VideoSection
         title="Agriculture Matters to the Future of Development"
-        videoSrc=""
+        videoSrc={VIDEO_CONTENT.videoUrl}
         backgroundSrc="/videos/bg-video.webp"
         statsPosition="top"
         rounded="md"

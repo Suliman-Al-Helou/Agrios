@@ -6,7 +6,7 @@ export const PROJECTS_PAGE_HERO = {
 };
 
 // ─── Projects Grid ────────────────────────────────────────
-export type Project = {
+export type Projects = {
   id: string;
   title: string;
   image: string;
@@ -14,7 +14,7 @@ export type Project = {
   href: string;
 };
 
-export const PROJECTS_LIST: Project[] = [
+export const PROJECTS_LIST: Projects[] = [
   {
     id: "easy-harvesting",
     title: "Easy Harvesting",

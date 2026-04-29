@@ -6,17 +6,17 @@ export default function Features() {
     {
       title: "Feature 01",
       subtitle: "We're using a new technology",
-      image: "/section2-1.png",
+      image: "/section2-1.webp",
     },
     {
       title: "Feature 02",
       subtitle: "Good in smart organic services",
-      image: "/section2-2.png",
+      image: "/section2-2.webp",
     },
     {
       title: "Feature 03",
       subtitle: "Reforming in the systems",
-      image: "/section2-3.png",
+      image: "/section2-3.webp",
     },
   ];
 

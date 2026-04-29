@@ -6,7 +6,7 @@ import type { Service } from "@/types/Service";
 type Props = Pick<
   Service,
   "title" | "image" | "imageAlt" | "icon" | "iconAlt" | "href"
->;
+> & { delay?: number };
 
 export default function ServiceCard({
   title,
@@ -15,10 +15,12 @@ export default function ServiceCard({
   icon,
   iconAlt,
   href,
+  delay = 0,
 }: Props) {
   return (
     <AnimatedSection
       animation="fadeInUp"
+      delay={delay}
       className="group relative cursor-pointer overflow-hidden rounded-xl"
     >
       {/* Image */}

@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { FaPlay } from "react-icons/fa";
 import { X } from "lucide-react";
-import { scaleUp, overlayFade } from "@/lib/animations";
 import StatsBar from "@/components/ui/StatsBar";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { STATS } from "../../constants/home/videoSection";
 import Image from "next/image";
+
 // ─── Types ────────────────────────────────────────────────
 type VideoSectionProps = {
   badge?: string;
@@ -34,6 +33,18 @@ export default function VideoSection({
     md: "rounded-2xl",
     lg: "rounded-2xl",
   };
+
+  const getEmbedUrl = (url: string) => {
+    if (!url) return null;
+    const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/|.*embed\/|.*shorts\/))([^?&"'>]+)/);
+    if (ytMatch && ytMatch[1]) {
+      return `https://www.youtube-nocookie.com/embed/${ytMatch[1]}?autoplay=1`;
+    }
+    return null;
+  };
+
+  const embedUrl = getEmbedUrl(videoSrc);
+
   return (
     <>
       <section className="relative h-173 w-full overflow-visible bg-white">
@@ -48,15 +59,6 @@ export default function VideoSection({
         <div
           className={`absolute inset-0 mx-6 overflow-hidden ${rounded ? roundedMap[rounded] : ""}`}
         >
-          {/* <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="h-full w-full object-cover"
-          >
-            <source src={backgroundSrc} type="video/mp4" />
-          </video> */}
           <Image
             src={backgroundSrc}
             alt="background"
@@ -74,7 +76,7 @@ export default function VideoSection({
 
         {/* Content */}
         <div className="relative mx-auto flex h-full max-w-6xl flex-col items-center justify-center px-4 md:flex-row md:justify-between">
-          <div className="mx-auto mt-50 w-170">
+          <div className="mx-auto mt-50 w-full md:w-170">
             <SectionHeader
               badge={""}
               title={title}
@@ -84,21 +86,17 @@ export default function VideoSection({
           </div>
 
           {/* Play Button */}
-          <motion.button
-            variants={scaleUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+          <button
             onClick={() => setOpen(true)}
             aria-label="Play video"
-            className="group absolute top-[30%] left-[50%] hidden h-24 w-24 -translate-x-7 cursor-pointer items-center justify-center rounded-full bg-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl md:flex"
+            className="group absolute top-[30%] left-[50%] flex h-24 w-24 -translate-x-7 cursor-pointer items-center justify-center rounded-full bg-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl"
           >
             <span className="absolute h-24 w-24 animate-ping rounded-full bg-white/30" />
             <FaPlay
               className="ml-1 text-[#4BAF47] transition-colors duration-200 group-hover:text-green-700"
               size={28}
             />
-          </motion.button>
+          </button>
         </div>
 
         {/* StatsBar — BOTTOM (About) */}
@@ -110,44 +108,48 @@ export default function VideoSection({
       </section>
 
       {/* Video Modal */}
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              variants={overlayFade}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              onClick={() => setOpen(false)}
-              className="fixed inset-0 z-50 cursor-pointer bg-black/80"
-            />
-            <motion.div
-              variants={scaleUp}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="fixed top-1/2 left-1/2 z-50 aspect-video w-[90vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl shadow-2xl"
-            >
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/80 cursor-pointer" 
+            onClick={() => setOpen(false)}
+          />
+          <div className="relative z-50 aspect-video w-[90vw] max-w-4xl overflow-hidden rounded-xl shadow-2xl bg-black flex items-center justify-center">
+            {embedUrl ? (
+              <iframe
+                src={embedUrl}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="h-full w-full border-none"
+              />
+            ) : videoSrc ? (
               <video
                 autoPlay
                 controls
                 preload="none"
-
                 className="h-full w-full object-cover"
               >
                 <source src={videoSrc} type="video/mp4" />
+                <source src={videoSrc} type="video/webm" />
+                Your browser does not support the video tag.
               </video>
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Close video"
-                className="absolute top-3 right-3 rounded-full bg-black/60 p-1.5 text-white transition-colors duration-200 hover:bg-black"
-              >
-                <X size={18} />
-              </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            ) : (
+              <div className="text-white text-center p-8">
+                <p className="text-xl font-bold mb-2">Video source not found!</p>
+                <p className="text-gray-400">Please check your constants/home/videoSection.ts</p>
+              </div>
+            )}
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Close video"
+              className="absolute -top-12 right-0 rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/40 md:top-3 md:right-3"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -2,5 +2,5 @@
 export const ABOUT_VIDEO = {
   title: "ECO-Friendly Products can be Made from Scratch",
   backgroundSrc: "/videos/bg-video.webp",
-  videoSrc: "/videos/farm-background.mp4",
+  videoSrc: "https://www.pexels.com/download/video/33919066/",
 };

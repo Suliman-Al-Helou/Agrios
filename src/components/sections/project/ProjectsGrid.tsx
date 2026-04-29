@@ -1,15 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { staggerCards, cardAnimation } from "@/lib/animations";
-import type { Project } from "@/constants/project/project-page";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import type { Projects } from "@/constants/project/project-page";
 
-// ─── Single Card ──────────────────────────────────────────
-function ProjectCard({ title, image, imageAlt, href }: Omit<Project, "id">) {
+function ProjectCard({ title, image, imageAlt, href, delay = 0 }: Omit<Projects, "id"> & { delay?: number }) {
   return (
-    <motion.div variants={cardAnimation} className="relative">
+    <AnimatedSection animation="fadeInUp" delay={delay} className="relative">
       <Link
         href={href}
         className="group relative block aspect-[3/4] overflow-hidden rounded-2xl"
@@ -34,32 +30,27 @@ function ProjectCard({ title, image, imageAlt, href }: Omit<Project, "id">) {
           </h2>
         </div>
       </Link>
-    </motion.div>
+    </AnimatedSection>
   );
 }
 
 // ─── Grid ─────────────────────────────────────────────────
-export default function ProjectsGrid({ projects }: { projects: Project[] }) {
+export default function ProjectsGrid({ projects }: { projects: Projects[] }) {
   return (
     <section className="bg-white py-20" aria-label="Projects grid">
       <div className="mx-auto max-w-6xl px-4">
-        <motion.div
-          variants={staggerCards}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.05 }}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project) => (
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
               title={project.title}
               image={project.image}
               imageAlt={project.imageAlt}
               href={project.href}
+              delay={index * 100}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

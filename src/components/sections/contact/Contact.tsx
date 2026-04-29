@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import { caveat } from "@/lib/fonts";
-import { fadeUp, staggerContainer } from "@/lib/animations";
 import {
   CONTACT_CARDS,
   CONTACT_MAP_URL,
@@ -14,9 +13,10 @@ import {
 // ─── Info Card ────────────────────────────────────────────
 function InfoCard({ card }: { card: ContactCard }) {
   return (
-    <motion.div
-      variants={fadeUp}
-      className={`${card.bgColor} mt-15 rounded-xl p-10 text-white shadow-lg`}
+    <AnimatedSection
+      animation="fadeInUp"
+      delay={card.delay}
+      className={`${card.bgColor} mt-15 rounded-xl p-10 text-white shadow-lg `}
     >
       <h3 className={`${caveat.className} mb-4 text-3xl font-bold`}>
         {card.title}
@@ -38,7 +38,7 @@ function InfoCard({ card }: { card: ContactCard }) {
       {card.address && (
         <p className="text-sm leading-relaxed opacity-90">{card.address}</p>
       )}
-    </motion.div>
+    </AnimatedSection>
   );
 }
 
@@ -56,7 +56,7 @@ function ContactForm() {
 
   return (
     // ✅ relative + overflow-hidden عشان الـ Image يتقطع صح
-    <div className="relative overflow-hidden rounded-xl p-10" style={{ minHeight: "650px" }}>
+    <div className="relative overflow-hidden rounded-xl p-10 bg-[#4BAF47]"  style={{ minHeight: "650px" }}>
 
       {/* ✅ Background Image — next/image أفضل من CSS background */}
       <Image
@@ -137,30 +137,18 @@ export default function Contact() {
     <div className="bg-white">
       {/* ── Info Cards ── */}
       <section className="relative z-20 mx-auto -mt-16 max-w-6xl px-4 ">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-6 md:grid-cols-3"
-        >
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {CONTACT_CARDS.map((card, index) => (
-            <InfoCard key={index} card={card} />
+            <InfoCard key={index} card={{ ...card, delay: index * 100 } as any} />
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── Map + Form ── */}
       <section className="mx-auto max-w-6xl px-4 py-20">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1  gap-0 overflow-hidden rounded-2xl shadow-sm md:grid-cols-2 bg-[#F8F7F0] " 
-        >
+        <div className="grid grid-cols-1  gap-0 overflow-hidden rounded-2xl shadow-sm md:grid-cols-2 bg-[#F8F7F0]">
           {/* Map */}
-          <motion.div variants={fadeUp} style={{ height: "650px" }}>
+          <AnimatedSection animation="fadeInUp" className="h-[650px] w-full">
             <iframe
               src={CONTACT_MAP_URL}
               className="h-full w-full border-0"
@@ -169,13 +157,13 @@ export default function Contact() {
               referrerPolicy="no-referrer-when-downgrade"
               title="Agrios location on Google Maps"
             />
-          </motion.div>
+          </AnimatedSection>
 
           {/* Form */}
-          <motion.div variants={fadeUp}>
+          <AnimatedSection animation="fadeInUp" delay={200}>
             <ContactForm />
-          </motion.div>
-        </motion.div>
+          </AnimatedSection>
+        </div>
       </section>
     </div>
   );

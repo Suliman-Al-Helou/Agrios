@@ -1,9 +1,5 @@
-"use client";
-
-import { motion } from "motion/react";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import { caveat } from "@/lib/fonts";
-
-import { fadeUp, staggerCards } from "@/lib/animations";
 import ServiceCard from "@/components/service/ServicesCard";
 import type { ServicesSectionData } from "@/types/Service";
 
@@ -19,11 +15,8 @@ export default function ServicesSection({data}: Props) {
 
       <div className="relative mx-auto max-w-6xl pt-28">
         {/* Header */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+        <AnimatedSection
+          animation="fadeInUp"
           className="mb-12 text-center"
         >
           <span className={`${caveat.className} text-[24px] text-[#EEC044]`}>
@@ -32,17 +25,11 @@ export default function ServicesSection({data}: Props) {
           <h2 className="mt-2 text-3xl font-bold text-black md:text-4xl">
             {data.title}
           </h2>
-        </motion.div>
+        </AnimatedSection>
 
         {/* Cards Grid */}
-        <motion.div
-          variants={staggerCards}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4"
-        >
-          {data.services.map((service) => (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+          {data.services.map((service, index) => (
             <ServiceCard
               key={service.id}
               title={service.title}
@@ -51,9 +38,10 @@ export default function ServicesSection({data}: Props) {
               icon={service.icon}
               iconAlt={service.iconAlt}
               href={service.href}
+              delay={index * 100}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

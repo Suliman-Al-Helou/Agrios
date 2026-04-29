@@ -150,6 +150,7 @@ function ServiceContent({ service }: { service: ServiceData }) {
             alt={service.mainImage.alt}
             width={800}
             height={300}
+            priority
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 60vw"
           />

@@ -3,16 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "motion/react";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import { caveat } from "@/lib/fonts";
-
 import { ArrowUp, ArrowDown } from "lucide-react";
-import {
-  fadeUp,
-  slideRight,
-  slideLeft,
-  staggerContainer,
-} from "@/lib/animations";
 import {
   TESTIMONIALS_CONTENT,
   TESTIMONIALS,
@@ -32,11 +25,8 @@ export default function TestimonialsSection() {
     <section className="bg-[#f5f3ee] px-4 py-20 md:px-8 lg:px-16">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-center gap-9 md:flex-row">
         {/* ── LEFT ── */}
-        <motion.div
-          variants={slideLeft}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+        <AnimatedSection
+          animation="slideInLeft"
           className="relative flex flex-col items-center md:items-start"
         >
           <p className={`${caveat.className} mb-2 text-[24px] text-[#EEC044]`}>
@@ -75,24 +65,17 @@ export default function TestimonialsSection() {
               <ArrowDown size={20} />
             </button>
           </div>
-        </motion.div>
+        </AnimatedSection>
 
         {/* ── RIGHT ── */}
-        <motion.div
-          variants={slideRight}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="w-full rounded-2xl bg-white shadow-sm md:max-w-xl"
+        <AnimatedSection
+          animation="slideInRight"
+          className="w-full rounded-2xl bg-white shadow-sm md:max-w-xl overflow-hidden"
         >
-          <AnimatePresence mode="wait">
-            <motion.div
+            <div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-              className="flex items-center justify-between gap-10 p-10"
+              className="flex items-center justify-between gap-10 p-10 transition-all duration-500 ease-in-out"
+              style={{ animation: 'fadeIn 0.5s ease-out' }}
             >
               {/* Text */}
               <div>
@@ -121,8 +104,7 @@ export default function TestimonialsSection() {
                 {/* Green dot */}
                 <div className="absolute -bottom-3 left-10 h-6 w-6 rounded-full bg-green-500" />
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
 
           {/* Mobile dots */}
           <div className="flex justify-center gap-2 pb-6 md:hidden">
@@ -136,7 +118,7 @@ export default function TestimonialsSection() {
               />
             ))}
           </div>
-        </motion.div>
+        </AnimatedSection>
       </div>
     </section>
   );

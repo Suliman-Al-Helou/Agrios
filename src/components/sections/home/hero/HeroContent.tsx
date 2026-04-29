@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import { caveat } from "@/lib/fonts";
 import Container from "@/components/ui/Container";
 import { HERO_CONTENT, HERO_SLIDES } from "@/constants/home/Hero";
@@ -16,40 +15,33 @@ export default function HeroContent({ activeIndex, onDotClick }: HeroContentProp
   return (
     <div className="relative z-10 flex h-full items-center justify-center md:justify-start">
       <Container>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="relative flex flex-col items-center md:block"
-        >
-          <motion.p variants={fadeUp} className="mb-4 text-sm tracking-widest text-white uppercase">
+        <AnimatedSection className="relative flex flex-col items-center md:block">
+          <p className="mb-4 text-sm tracking-widest text-white uppercase">
             {HERO_CONTENT.badge}
-          </motion.p>
+          </p>
 
-          {/* ✅ h1 بدل h2 للـ SEO */}
-          <motion.h1
-            variants={fadeUp}
+          <h1
             className={`${caveat.className} text-center text-4xl font-bold text-white sm:text-5xl md:w-auto md:text-start md:text-[110px] md:leading-tight`}
           >
             {HERO_CONTENT.title}
-          </motion.h1>
+          </h1>
 
-          <motion.p variants={fadeUp} className="mt-6 mb-10 text-center text-gray-200 md:w-[520px] md:text-start">
+          <p className="mt-6 mb-10 text-center text-gray-200 md:w-[520px] md:text-start">
             {HERO_CONTENT.description}
-          </motion.p>
+          </p>
 
-          <motion.div variants={fadeUp}>
+          <div>
             <Link
               href={HERO_CONTENT.cta.href}
               className="inline-flex h-14 w-48 items-center justify-center rounded-[10px] bg-[#4BAF47] px-6 py-3 font-bold text-white transition-all duration-300 ease-out hover:scale-105 hover:bg-green-600 hover:shadow-lg active:scale-95"
             >
               {HERO_CONTENT.cta.label}
             </Link>
-          </motion.div>
+          </div>
+        </AnimatedSection>
 
           {/* Desktop Dots */}
-          <div className="absolute top-1/2 right-0 z-20 hidden -translate-y-1/2 flex-col gap-4 md:flex">
+          <div className="absolute top-1/2 right-50 z-20 hidden -translate-y-1/2 flex-col gap-4 md:flex">
             {HERO_SLIDES.map((_, index) => (
               <button
                 key={index}
@@ -65,7 +57,7 @@ export default function HeroContent({ activeIndex, onDotClick }: HeroContentProp
           </div>
 
           {/* Mobile Dots */}
-          <div className="mt-8 flex gap-3 md:hidden">
+          <div className="mt-8 flex justify-center md:hidden gap-3">
             {HERO_SLIDES.map((_, index) => (
               <button
                 key={index}
@@ -77,7 +69,7 @@ export default function HeroContent({ activeIndex, onDotClick }: HeroContentProp
               />
             ))}
           </div>
-        </motion.div>
+
       </Container>
     </div>
   );

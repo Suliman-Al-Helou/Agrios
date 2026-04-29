@@ -58,7 +58,7 @@ export const SERVICES_HERO = {
 export const SERVICES_VIDEO = {
   title: "Agriculture Matters to the Future of Development",
   backgroundSrc: "/videos/farm-background.mp4",
-  videoSrc: "/videos/farm-background.mp4",
+  videoSrc: "https://www.youtube.com/shorts/sukFo2hPKyM",
   watchLabel: "Watch our video",
 };
 

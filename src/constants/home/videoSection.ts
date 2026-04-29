@@ -4,7 +4,7 @@ export const VIDEO_CONTENT = {
   background: {
     src: "/videos/bg-video.webp",
   },
-  videoUrl: "/videos/farm-background.mp4",
+  videoUrl: "https://videos.pexels.com/video-files/4406240/4406240-uhd_2560_1440_25fps.mp4",
 };
 
 export type Stat = {

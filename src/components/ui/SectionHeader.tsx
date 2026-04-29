@@ -1,9 +1,5 @@
-"use client";
-
-import { motion } from "motion/react";
 import { caveat } from "@/lib/fonts";
-
-import { fadeUp } from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 // ─── Types ────────────────────────────────────────────────
 type Align = "left" | "center" | "right";
@@ -35,21 +31,8 @@ export default function SectionHeader({
   animated = true,
   variant = "default",
 }: SectionHeaderProps) {
-  const Wrapper = animated ? motion.div : "div";
-  const wrapperProps = animated
-    ? {
-        variants: fadeUp,
-        initial: "hidden" as const,
-        whileInView: "show" as const,
-        viewport: { once: true, amount: 0.3 },
-      }
-    : {};
-
-  return (
-    <Wrapper
-      {...wrapperProps}
-      className={`flex flex-col gap-2 ${alignMap[align]} ${description || subtitle ? "mb-8" : "mb-12"}`}
-    >
+  const content = (
+    <>
       {/* Badge — الخط المائل الأصفر */}
       <p className={`${caveat.className} text-[24px] text-[#EEC044]`}>
         {badge ?? ""}
@@ -77,6 +60,18 @@ export default function SectionHeader({
           {description}
         </p>
       )}
-    </Wrapper>
+    </>
   );
+
+  const className = `flex flex-col gap-2 ${alignMap[align]} ${description || subtitle ? "mb-8" : "mb-12"}`;
+
+  if (animated) {
+    return (
+      <AnimatedSection animation="fadeInUp" className={className}>
+        {content}
+      </AnimatedSection>
+    );
+  }
+
+  return <div className={className}>{content}</div>;
 }

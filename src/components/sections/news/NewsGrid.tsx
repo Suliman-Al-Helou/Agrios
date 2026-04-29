@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "motion/react";
-import { staggerCards } from "@/lib/animations";
 import NewsCard from "@/components/shared/NewsCard";
 import type { NewsArticle } from "@/constants/shared/newsCard";
 
@@ -9,14 +5,8 @@ export default function NewsGrid({ articles }: { articles: NewsArticle[] }) {
   return (
     <section className="bg-white py-20" aria-label="News grid">
       <div className="mx-auto max-w-6xl px-4">
-        <motion.div
-          variants={staggerCards}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.05 }}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {articles.map((article) => (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article, index) => (
             <NewsCard
               key={article.id}
               title={article.title}
@@ -28,9 +18,10 @@ export default function NewsGrid({ articles }: { articles: NewsArticle[] }) {
               comments={article.comments}
               href={article.href}
               titleGrid={article.titleGrid}
+              delay={index * 100}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -3,9 +3,8 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { ChevronRight, Star } from "lucide-react";
-import { staggerCards, cardAnimation, fadeUp } from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useCartStore } from "@/store/cartStore";
 import type { Product, ShopCategory } from "@/constants/shop/products";
 import { SORT_OPTIONS, PRICE_MIN, PRICE_MAX } from "@/constants/shop/products";
@@ -29,7 +28,7 @@ function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <motion.div variants={cardAnimation}>
+    <div className="animate-fadeInUp">
       <Link
         href={`/shop/listing/${product.id}`}
         className="group block overflow-hidden rounded-lg bg-white  shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
@@ -63,7 +62,7 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
@@ -298,11 +297,8 @@ export default function ShopGrid({
 
             {/* Grid */}
             {paginated.length === 0 ? (
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                animate="show"
-                className="flex flex-col items-center justify-center py-24 text-center"
+              <div
+                className="flex flex-col items-center justify-center py-24 text-center animate-fadeIn"
               >
                 <p className="text-lg font-semibold text-gray-700">No products found</p>
                 <p className="mt-1 text-sm text-gray-400">Try adjusting your filters</p>
@@ -313,19 +309,15 @@ export default function ShopGrid({
                 >
                   Clear filters
                 </button>
-              </motion.div>
+              </div>
             ) : (
-              <motion.div
-                variants={staggerCards}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.05 }}
+              <div
                 className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3"
               >
                 {paginated.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
-              </motion.div>
+              </div>
             )}
 
             {/* Pagination */}
