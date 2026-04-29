@@ -92,7 +92,7 @@ export default function NewsSidebar({ latestPosts, categories, tags }: Props) {
                   <div className="mb-1 flex items-center gap-1.5">
                     <span className="h-2 w-2 shrink-0 rounded-full bg-[#EEC044]" />
                     <span className="text-xs text-gray-400">
-                      by {post.author}
+                      {/* by {post.author} */}
                     </span>
                   </div>
                   <p className="line-clamp-2 text-sm leading-snug font-semibold text-gray-800 transition-colors duration-200 group-hover:text-[#4BAF47]">
