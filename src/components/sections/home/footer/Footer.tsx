@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { FooterBrand } from "./FooterBrand"
 import { FooterLinks } from "./FooterLinks"

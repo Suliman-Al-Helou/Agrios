@@ -5,12 +5,14 @@ type Props = {
   title: string;
   subtitle: string;
   image: string;
+  delay?: number;
 };
 
-export default function FeatureCard({ title, subtitle, image }: Props) {
+export default function FeatureCard({ title, subtitle, image, delay = 0 }: Props) {
   return (
     <AnimatedSection
       animation="fadeInUp"
+      delay={delay}
       className="
       bg-white rounded-2xl w-92.5 h-66 text-center
       flex justify-end flex-col

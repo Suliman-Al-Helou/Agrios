@@ -1,9 +1,5 @@
 import type { NextConfig } from 'next';
-module.exports = {
-  experimental: {
-    modern: true, // يرسل JS فقط كـ ES Modules للمتصفحات الحديثة
-  },
-};
+
 const nextConfig: NextConfig = {
   // Turbopack configuration
   turbopack: {},

@@ -1,6 +1,5 @@
-"use client"
-
 import Link from "next/link"
+import Image from "next/image"
 import { FaFacebook, FaInstagram, FaPinterest, FaTwitter } from "react-icons/fa"
 import { FOOTER_SOCIAL_LINKS } from "./footer.constants"
 
@@ -10,7 +9,7 @@ export function FooterBrand() {
   return (
     <div className="flex flex-col gap-5">
       <Link href="/" className="inline-flex items-center gap-2 group">
-        <img
+        <Image
           src="/logo-fotter-optimized.svg"
           alt="Agrios Logo"
           width={120}

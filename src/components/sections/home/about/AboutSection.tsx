@@ -1,15 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { Check } from "lucide-react";
-import {
-  fadeUp,
-  slideRight,
-  staggerContainer,
-  scaleUp,
-} from "@/lib/animations";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeader from "@/components/ui/SectionHeader";
 import {
   ABOUT_CONTENT,
@@ -18,18 +10,14 @@ import {
   ABOUT_IMAGES,
 } from "@/constants/home/About";
 
-
 export default function AboutSection() {
   return (
     <section className="overflow-hidden bg-white py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid items-center gap-10 md:grid-cols-2">
           {/* ── LEFT — Images ── */}
-          <motion.div
-            variants={slideRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
+          <AnimatedSection
+            animation="slideInLeft"
             className="relative flex justify-center"
           >
             {/* Main Image */}
@@ -44,11 +32,9 @@ export default function AboutSection() {
             </div>
 
             {/* Secondary Image */}
-            <motion.div
-              variants={scaleUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
+            <AnimatedSection
+              animation="scaleUp"
+              delay={200}
               className="absolute bottom-0 left-0 aspect-square w-30 overflow-hidden rounded-full border-[10px] border-white shadow-lg md:-bottom-20 md:-left-20 md:w-70"
             >
               <Image
@@ -58,15 +44,12 @@ export default function AboutSection() {
                 className="object-cover"
                 sizes="(max-width: 768px) 120px, 280px"
               />
-            </motion.div>
-          </motion.div>
+            </AnimatedSection>
+          </AnimatedSection>
 
           {/* ── RIGHT — Content ── */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+          <AnimatedSection
+            animation="fadeInUp"
             className="text-center md:text-left"
           >
             <SectionHeader
@@ -78,8 +61,9 @@ export default function AboutSection() {
             />
 
             {/* Features + Checklist */}
-            <motion.div
-              variants={fadeUp}
+            <AnimatedSection
+              animation="fadeInUp"
+              delay={200}
               className="mt-6 flex flex-col items-center space-y-6 md:items-start"
             >
               {/* Feature Icons */}
@@ -108,18 +92,18 @@ export default function AboutSection() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </AnimatedSection>
 
             {/* CTA */}
-            <motion.div variants={fadeUp}>
+            <AnimatedSection animation="fadeInUp" delay={400}>
               <Link
                 href={ABOUT_CONTENT.cta.href}
                 className="mt-10 inline-flex h-15 w-49 items-center justify-center rounded-[10px] bg-[#4BAF47] px-6 py-3 font-bold text-white transition-all duration-300 ease-out hover:scale-105 hover:bg-green-600 hover:shadow-lg active:scale-95"
               >
                 {ABOUT_CONTENT.cta.label}
               </Link>
-            </motion.div>
-          </motion.div>
+            </AnimatedSection>
+          </AnimatedSection>
         </div>
       </div>
     </section>
