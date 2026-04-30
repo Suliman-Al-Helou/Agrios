@@ -56,8 +56,8 @@ export default function TopBar() {
                       size={28}
                     />
                     <div>
-                      <p className="text-xs text-gray-400">{label}</p>
-                      <p className="text-sm font-semibold text-gray-800">
+                      <p className="text-xs text-gray-300">{label}</p>
+                      <p className="text-sm font-semibold text-gray-700">
                         {value}
                       </p>
                     </div>
