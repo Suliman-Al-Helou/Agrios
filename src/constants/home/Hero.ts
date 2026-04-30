@@ -7,12 +7,12 @@ export type HeroSlide = {
 export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
-    image: "/images/home/hero/h1.webp",
+    image: "/images/home/hero/h2.webp",
     alt: "Agriculture and Eco Farming - slide 1",
   },
   {
     id: 2,
-    image: "/images/home/hero/h2.webp",
+    image: "/images/home/hero/h1.webp",
     alt: "Agriculture and Eco Farming - slide 2",
   },
   {
