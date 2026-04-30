@@ -5,5 +5,6 @@ import { Caveat } from "next/font/google";
 export const caveat = Caveat({
   subsets: ["latin"],
   display: "swap", // <- جرب هادي
+  preload: true,
   variable: "--font-caveat",
 });
