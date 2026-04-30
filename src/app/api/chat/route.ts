@@ -1,31 +1,38 @@
+// src/app/api/chat/route.ts
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json({ error: "API Key not configured" }, { status: 500 });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      systemInstruction: "You are Agrios AI, a friendly and professional agricultural expert for 'Agrios', the world's largest organic farm. Answer concisely and professionally.",
+    const groq = new Groq({ apiKey });
+
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        {
+          role: "system",
+          content: "You are Agrios AI, a friendly and professional agricultural expert for 'Agrios', the world's largest organic farm. Answer concisely and professionally.",
+        },
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+      max_tokens: 500,
     });
 
-    const result = await model.generateContent(message);
-    const response = await result.response;
-    const text = response.text();
-
+    const text = completion.choices[0]?.message?.content || "No response";
     return NextResponse.json({ text });
-  } catch (error: any) {
-    console.error("Chat API Error:", error.message || error);
-    return NextResponse.json(
-      { error: error.message || "Failed to fetch response from Gemini" },
-      { status: 500 }
-    );
+
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to fetch response";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

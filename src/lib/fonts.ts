@@ -4,7 +4,6 @@ import { Caveat } from "next/font/google";
 // Prevents loading the font multiple times
 export const caveat = Caveat({
   subsets: ["latin"],
-  display: "optional",
-  preload: false,
+  display: "swap", // <- جرب هادي
   variable: "--font-caveat",
 });

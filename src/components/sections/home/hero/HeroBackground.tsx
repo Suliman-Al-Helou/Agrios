@@ -33,6 +33,7 @@ export default function HeroBackground({ activeIndex }: HeroBackgroundProps) {
               loading={slide.id !== 1 ? "lazy" : undefined}
               className="object-cover"
               sizes="100vw"
+              quality={80} 
             />
           </div>
         </motion.div>
