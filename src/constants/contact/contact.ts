@@ -17,6 +17,7 @@ export type ContactCard = {
   email?: string;
   workTime?: string;
   address?: string;
+  delay?: number;
 };
 
 export const CONTACT_CARDS: ContactCard[] = [

@@ -139,7 +139,7 @@ export default function Contact() {
       <section className="relative z-20 mx-auto -mt-16 max-w-6xl px-4 ">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {CONTACT_CARDS.map((card, index) => (
-            <InfoCard key={index} card={{ ...card, delay: index * 100 } as any} />
+            <InfoCard key={index} card={{ ...card, delay: index * 100 }} />
           ))}
         </div>
       </section>
