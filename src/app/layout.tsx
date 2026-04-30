@@ -43,6 +43,8 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
+import Chatbot from "../components/shared/Chatbot";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -59,6 +61,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );
